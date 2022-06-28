@@ -1,5 +1,6 @@
 package com.epamTask.controller;
 
+import com.epamTask.entity.News;
 import com.epamTask.entity.User;
 import com.epamTask.service.*;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,8 @@ public class UserController {
     private NewsService newsService;
 
     @GetMapping("/news_list")
-    public ModelAndView homePage(ModelAndView model, @RequestParam(defaultValue = "User") String name) {
-        model.addObject("name", name);
+    public ModelAndView homePage(ModelAndView model) {
+        model.addObject("newsList", newsService.getAll());
         model.setViewName("news_list");
         return model;
     }
@@ -39,8 +40,6 @@ public class UserController {
     @PostMapping("/create_news")
     public String give_job(@RequestParam String title, @RequestParam("date") Date date,
                            @RequestParam String brief, @RequestParam String content) {
-//        DateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy");
-//        String date = dateFormat.format(datee);
         String myDate = String.valueOf(date);
         newsService.saveNews(title, myDate, brief, content);
         return "redirect:/user/news_list";
@@ -52,9 +51,31 @@ public class UserController {
     }
 
     @GetMapping("/add_news")
-    public ModelAndView edit(ModelAndView model) {
+    public ModelAndView add_news(ModelAndView model) {
         model.setViewName("add_news");
         return model;
+    }
+
+    @GetMapping("/view")
+    public ModelAndView view(ModelAndView model, @RequestParam Long news_id) {
+        News news = newsService.getById(news_id);
+        model.addObject("news", news);
+        model.setViewName("view");
+        return model;
+    }
+
+    @GetMapping("/edit")
+    public ModelAndView edit(ModelAndView model, @RequestParam Long news_id) {
+        News news = newsService.getById(news_id);
+        model.addObject("news", news);
+        model.setViewName("edit");
+        return model;
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam(name = "news_id") Long news_id) {
+        newsService.deleteById(news_id);
+        return "redirect:/user/news_list";
     }
 
 }

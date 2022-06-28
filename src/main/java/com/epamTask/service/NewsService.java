@@ -1,14 +1,17 @@
 package com.epamTask.service;
 
 import com.epamTask.entity.News;
+import com.epamTask.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class NewsService {
+    @Autowired
     private final NewsRepository newsRepository;
 
     public void saveNews(String title, String date, String brief, String content) {
@@ -18,5 +21,22 @@ public class NewsService {
         news.setBrief(brief);
         news.setContent(content);
         newsRepository.save(news);
+    }
+
+    public List<News> getAll() {
+        return newsRepository.findAll();
+    }
+
+    public News getById(Long newsId) {
+        return newsRepository.findNewsById(newsId);
+    }
+
+    public boolean deleteById(Long id) {
+        if (id != null) {
+//            newsRepository.deleteById(Math.toIntExact(id));
+            newsRepository.delete(newsRepository.findNewsById(id));
+            return true;
+        }
+        return false;
     }
 }

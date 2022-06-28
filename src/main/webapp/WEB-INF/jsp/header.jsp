@@ -26,7 +26,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/add_news">Add News</a>
+                    <a class="nav-link active" href="/user/add_news">Add News</a>
                 </li>
 
                 <li class="nav-item dropdown">
