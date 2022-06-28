@@ -16,7 +16,7 @@
         <h4><a href="/registration">Зарегистрироваться</a></h4>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-        <h4><a href="/user/home">Новости</a></h4>
+        <h4><a href="/user/news_list">Новости</a></h4>
         <h4><a href="/logout">Выйти</a></h4>
     </sec:authorize>
 
