@@ -1,7 +1,7 @@
 package com.epamTask.controller;
 
-import com.epamTask.entity.User;
-import com.epamTask.service.UserService;
+import com.epamTask.entity.*;
+import com.epamTask.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +36,7 @@ public class RegistrationController {
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
-        if (!userService.saveUser(userForm )){
+        if (!userService.saveUser(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
