@@ -45,9 +45,19 @@ public class UserController {
         return "redirect:/user/news_list";
     }
 
+    @PostMapping("/update")
+    public String update(@RequestParam String title, @RequestParam("date") Date date,
+                            @RequestParam String brief, @RequestParam String content,
+                            @RequestParam(name = "news_id") Long news_id) {
+        String myDate = String.valueOf(date);
+        newsService.update(title, myDate, brief, content, news_id);
+        return "redirect:/user/news_list";
+    }
+
     @GetMapping("/help")
-    public String help(){
-        return "redirect:/user/help";
+    public ModelAndView help(ModelAndView model){
+        model.setViewName("help");
+        return model;
     }
 
     @GetMapping("/add_news")

@@ -23,6 +23,15 @@ public class NewsService {
         newsRepository.save(news);
     }
 
+    public void update(String title, String date, String brief, String content, Long news_id) {
+        News news = newsRepository.findNewsById(news_id);
+        news.setTitle(title);
+        news.setDate(date);
+        news.setBrief(brief);
+        news.setContent(content);
+        newsRepository.save(news);
+    }
+
     public List<News> getAll() {
         return newsRepository.findAll();
     }
@@ -33,7 +42,6 @@ public class NewsService {
 
     public boolean deleteById(Long id) {
         if (id != null) {
-//            newsRepository.deleteById(Math.toIntExact(id));
             newsRepository.delete(newsRepository.findNewsById(id));
             return true;
         }

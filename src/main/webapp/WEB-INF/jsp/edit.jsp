@@ -19,7 +19,7 @@
         <label for="exampleInputEmail3" class="form-label">Content</label>
         <input type="text" class="form-control" name="content" id="exampleInputEmail3" aria-describedby="emailHelp">
     </div>
-
+    <input type="hidden" name="news_id" value="${news.id}"/>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </body>
